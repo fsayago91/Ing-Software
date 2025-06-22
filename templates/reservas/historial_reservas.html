@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Historial de Reservas{% endblock %}
+
+{% block content %}
+<h2>Historial de Reservas</h2>
+
+{% if historial %}
+    <ul>
+        {% for r in historial %}
+            <li>{{ r.fecha }} {{ r.hora }} - {{ r.cancha.nombre }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tenés reservas registradas.</p>
+{% endif %}
+{% endblock %}

@@ -8,5 +8,5 @@ urlpatterns = [
     path('mis-reservas/', views.mis_reservas, name='mis_reservas'),
     path('cancelar-reserva/<int:reserva_id>/', views.cancelar_reserva, name='cancelar_reserva'),
     path('modificar-reserva/<int:reserva_id>/', views.modificar_reserva, name='modificar_reserva'),
-
+    path('historial/', views.historial_reservas, name='historial_reservas'),
 ]

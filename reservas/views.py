@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Reserva
 from django.shortcuts import get_object_or_404
 from .forms import ModificarReservaForm
+from datetime import date
 
 def registro(request):
     if request.method == 'POST':
@@ -66,3 +67,9 @@ def modificar_reserva(request, reserva_id):
     else:
         form = ModificarReservaForm(instance=reserva)
     return render(request, 'reservas/modificar_reserva.html', {'form': form})
+
+@login_required
+def historial_reservas(request):
+    historial = Reserva.objects.filter(usuario=request.user).order_by('-fecha', '-hora')
+    return render(request, 'reservas/historial_reservas.html', {'historial': historial})
+
