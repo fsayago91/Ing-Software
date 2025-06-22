@@ -18,3 +18,12 @@ class ReservaForm(forms.ModelForm):
             'fecha': forms.DateInput(attrs={'type': 'date'}),
             'hora': forms.TimeInput(attrs={'type': 'time'}),
         }
+
+class ModificarReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ['fecha', 'hora']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'hora': forms.TimeInput(attrs={'type': 'time'}),
+        }

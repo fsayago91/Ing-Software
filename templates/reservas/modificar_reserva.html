@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Modificar Reserva{% endblock %}
+
+{% block content %}
+<h2>Modificar Reserva</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+</form>
+{% endblock %}

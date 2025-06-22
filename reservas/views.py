@@ -5,6 +5,10 @@ from .forms import RegistroUsuarioForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import ReservaForm
+from django.contrib.auth.decorators import login_required
+from .models import Reserva
+from django.shortcuts import get_object_or_404
+from .forms import ModificarReservaForm
 
 def registro(request):
     if request.method == 'POST':
@@ -37,3 +41,28 @@ def crear_reserva(request):
 
 def reserva_exitosa(request):
     return render(request, 'reservas/reserva_exitosa.html')
+
+@login_required
+def mis_reservas(request):
+    reservas = Reserva.objects.filter(usuario=request.user).order_by('fecha', 'hora')
+    return render(request, 'reservas/mis_reservas.html', {'reservas': reservas})
+
+@login_required
+def cancelar_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id, usuario=request.user)
+    reserva.delete()
+    return redirect('mis_reservas')
+
+from .forms import ModificarReservaForm
+
+@login_required
+def modificar_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id, usuario=request.user)
+    if request.method == 'POST':
+        form = ModificarReservaForm(request.POST, instance=reserva)
+        if form.is_valid():
+            form.save()
+            return redirect('mis_reservas')
+    else:
+        form = ModificarReservaForm(instance=reserva)
+    return render(request, 'reservas/modificar_reserva.html', {'form': form})
