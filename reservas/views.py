@@ -5,11 +5,11 @@ from .forms import RegistroUsuarioForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import ReservaForm
-from django.contrib.auth.decorators import login_required
 from .models import Reserva
 from django.shortcuts import get_object_or_404
 from .forms import ModificarReservaForm
 from datetime import date
+from .models import Cancha
 
 def registro(request):
     if request.method == 'POST':
@@ -72,4 +72,9 @@ def modificar_reserva(request, reserva_id):
 def historial_reservas(request):
     historial = Reserva.objects.filter(usuario=request.user).order_by('-fecha', '-hora')
     return render(request, 'reservas/historial_reservas.html', {'historial': historial})
+
+@login_required
+def lista_canchas(request):
+    canchas = Cancha.objects.all()
+    return render(request, 'reservas/lista_canchas.html', {'canchas': canchas})
 

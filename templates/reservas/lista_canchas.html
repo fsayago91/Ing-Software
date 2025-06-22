@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Canchas Disponibles{% endblock %}
+
+{% block content %}
+<h2>Listado de Canchas</h2>
+<ul>
+    {% for cancha in canchas %}
+        <li>
+            {{ cancha.nombre }} ({{ cancha.tipo }}) -
+            {% if cancha.estado == 'disponible' %}
+                <span style="color:green;">🟢 Disponible</span>
+            {% elif cancha.estado == 'mantenimiento' %}
+                <span style="color:orange;">🟡 En mantenimiento</span>
+            {% else %}
+                <span style="color:red;">🔴 Fuera de servicio</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
