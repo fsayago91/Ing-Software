@@ -1,7 +1,8 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('reservas.urls')), 
+    path('registro/', views.registro, name='registro'),
+    path('reserva/', views.crear_reserva, name='crear_reserva'),
+    path('reserva-exitosa/', views.reserva_exitosa, name='reserva_exitosa'),
 ]
