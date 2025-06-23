@@ -34,9 +34,15 @@ def crear_reserva(request):
         form = ReservaForm(request.POST)
         if form.is_valid():
             reserva = form.save(commit=False)
-            reserva.usuario = request.user  # Asigna el usuario logueado
-            reserva.save()
-            return redirect('reserva_exitosa')
+            reserva.usuario = request.user
+            if reserva.fecha < date.today():
+                form.add_error('fecha', 'No se puede reservar una fecha pasada.')
+            elif Reserva.objects.filter(cancha=reserva.cancha, fecha=reserva.fecha, hora=reserva.hora).exists():
+                 form.add_error(None, 'Ya existe una reserva para esa cancha en ese día y horario.')
+
+            else:
+                 reserva.save()
+                 return redirect('reserva_exitosa')          
     else:
         form = ReservaForm()
     return render(request, 'reservas/crear_reserva.html', {'form': form})

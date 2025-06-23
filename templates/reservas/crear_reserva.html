@@ -4,6 +4,11 @@
 
 {% block content %}
 <h2>Reservar una Cancha</h2>
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {{ form.non_field_errors }}
+    </div>
+{% endif %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
