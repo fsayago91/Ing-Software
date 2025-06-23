@@ -6,6 +6,8 @@
 <h2>Mi Perfil</h2>
 
 <ul class="list-group mb-3">
+    <li class="list-group-item"><strong>Nombre:</strong> {{ usuario.first_name }}</li>
+    <li class="list-group-item"><strong>Apellido:</strong> {{ usuario.last_name }}</li>
     <li class="list-group-item"><strong>Nombre de usuario:</strong> {{ usuario.username }}</li>
     <li class="list-group-item"><strong>Email:</strong> {{ usuario.email }}</li>
     <li class="list-group-item"><strong>Rol:</strong> {{ rol|title }}</li>

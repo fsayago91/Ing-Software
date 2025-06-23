@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from .models import Reserva, Cancha
 
 class RegistroUsuarioForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, label="Nombre")
+    last_name = forms.CharField(max_length=30, required=True, label="Apellido")
     email = forms.EmailField(required=True, label="Correo electrónico")
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 class ReservaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
