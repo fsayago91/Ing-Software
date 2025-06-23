@@ -12,8 +12,10 @@ class RegistroUsuarioForm(UserCreationForm):
 
 class ReservaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(ReservaForm, self).__init__(*args, **kwargs)
-        self.fields['cancha'].queryset = Cancha.objects.all()
+        super().__init__(*args, **kwargs)
+        # Filtrar solo canchas disponibles
+        self.fields['cancha'].queryset = Cancha.objects.filter(estado='disponible')
+        # Etiqueta más clara
         self.fields['cancha'].label_from_instance = lambda obj: f"{obj.nombre} - {obj.get_estado_display()}"
 
     class Meta:
