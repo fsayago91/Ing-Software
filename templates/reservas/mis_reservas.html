@@ -11,7 +11,11 @@
             <li>
                 {{ r.fecha }} {{ r.hora }} - {{ r.cancha.nombre }}
                 <a href="{% url 'modificar_reserva' r.id %}">Modificar</a> |
-                <a href="{% url 'cancelar_reserva' r.id %}">Cancelar</a>
+                <a href="{% url 'cancelar_reserva' r.id %}" 
+                    onclick="return confirm('¿Estás seguro de que querés cancelar esta reserva?');"
+                    class="btn btn-sm btn-outline-danger">
+                    Cancelar
+                </a>
             </li>
         {% endfor %}
     </ul>
