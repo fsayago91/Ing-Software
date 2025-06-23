@@ -10,5 +10,6 @@ urlpatterns = [
     path('modificar-reserva/<int:reserva_id>/', views.modificar_reserva, name='modificar_reserva'),
     path('historial/', views.historial_reservas, name='historial_reservas'),
     path('canchas/', views.lista_canchas, name='lista_canchas'),
+    path('perfil/', views.perfil_usuario, name='perfil_usuario'),
 
 ]

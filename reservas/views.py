@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from .forms import ModificarReservaForm
 from datetime import date
 from .models import Cancha
+from django.contrib.auth.models import Group
 
 def registro(request):
     if request.method == 'POST':
@@ -78,3 +79,13 @@ def lista_canchas(request):
     canchas = Cancha.objects.all()
     return render(request, 'reservas/lista_canchas.html', {'canchas': canchas})
 
+@login_required
+def perfil_usuario(request):
+    user = request.user
+    grupos = user.groups.values_list('name', flat=True)
+    rol = grupos[0] if grupos else 'Sin rol'
+
+    return render(request, 'reservas/perfil.html', {
+        'usuario': user,
+        'rol': rol,
+    })

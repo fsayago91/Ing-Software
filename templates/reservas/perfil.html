@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<h2>Mi Perfil</h2>
+
+<ul class="list-group mb-3">
+    <li class="list-group-item"><strong>Nombre de usuario:</strong> {{ usuario.username }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ usuario.email }}</li>
+    <li class="list-group-item"><strong>Rol:</strong> {{ rol|title }}</li>
+</ul>
+
+<a href="{% url 'mis_reservas' %}" class="btn btn-primary">Ver mis reservas</a>
+{% endblock %}
