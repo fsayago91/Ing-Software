@@ -64,3 +64,6 @@ python manage.py runserver
 /canchas/ → Estado operativo de todas las canchas
 
 /admin/ → Administración Django (requiere superusuario)
+
+
+Renglon de prueba
